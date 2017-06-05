@@ -1,0 +1,28 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+jar.baseName = 'library'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId='name.alenkov.habr.gradle-dynamic-dependency'
+            
+            version = new SimpleDateFormat('yyyyMMddHHmm').format(new Date())
+
+            from components.java
+        }
+    }
+}
+
+task(demoTask){
+    doLast{
+        logger.lifecycle('demo task')
+    }
+}
+jar.dependsOn demoTask

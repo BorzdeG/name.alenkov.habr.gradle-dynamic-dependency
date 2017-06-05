@@ -1,0 +1,14 @@
+apply plugin: 'java'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    compile subprojects.find({ it.name == 'ext-library' }) ? project(':ext-library')
+            : 'name.alenkov.habr.gradle-dynamic-dependency:library:+'
+}
