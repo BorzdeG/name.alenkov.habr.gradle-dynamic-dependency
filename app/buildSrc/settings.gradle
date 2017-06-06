@@ -1,16 +1,14 @@
-rootProject.name = 'app'
-
-final extDir = new File(rootDir, 'ext')
+final extDir = rootDir
 if (extDir.exists()) {
     extDir.eachDir { dir ->
         if (new File(dir, 'build.gradle').exists()) {
-            logger.trace('found ext module: ' + dir.name)
+            logger.trace('found ext plugin: ' + dir.name)
 
             final String prjName = ':' + dir.name
-            logger.lifecycle('include ext project: ' + prjName)
+            logger.lifecycle('include ext plugin: ' + prjName)
             include prjName
             project(prjName).projectDir = dir
-            project(prjName).name = 'ext-' + dir.name
+            project(prjName).name = 'ext-plugin-' + dir.name
         }
     }
 }
