@@ -10,6 +10,5 @@ repositories {
 }
 
 dependencies {
-    compile subprojects.find({ it.name == 'ext-library' }) ? project(':ext-library')
-            : 'name.alenkov.habr.gradle-dynamic-dependency:library:+'
+    compile findProject(':ext-library') ?: module(group: 'name.alenkov.habr.gradle-dynamic-dependency', name: 'library', version: '+')
 }
